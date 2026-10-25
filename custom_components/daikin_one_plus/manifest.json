@@ -9,9 +9,9 @@
   "homekit": {},
   "integration_type": "device",
   "iot_class": "cloud_polling",
+  "version": "1.0.0",
   "quality_scale": "bronze",
   "requirements": [],
   "ssdp": [],
-  "zeroconf": [],
-  "version": "1.0.0"
+  "zeroconf": []
 }

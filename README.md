@@ -6,7 +6,14 @@ every three minutes, and provides climate and schedule controls.
 
 ## Installing with HACS
 
-Follow instructions here: https://www.hacs.xyz/docs/faq/custom_repositories/.
+This repository is laid out as a HACS custom integration under
+`custom_components/daikin_one_plus`. Add the GitHub repository in HACS as a
+custom repository with the **Integration** category, install Daikin One+, and
+restart Home Assistant.
+
+The custom integration uses the same `daikin_one_plus` domain as the built-in
+Home Assistant integration. It replaces that integration and must not be
+installed alongside another copy of the domain.
 
 ## Setup and authentication
 

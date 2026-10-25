@@ -35,6 +35,7 @@ HVAC_MODE_TO_MODE = {
     HVACMode.AUTO: 3,
 }
 PARALLEL_UPDATES = 1
+_NATIVE_CLIMATE_API = hasattr(ClimateEntity, "native_temperature_unit")
 
 
 async def async_setup_entry(
@@ -58,7 +59,11 @@ class DaikinOnePlusClimate(DaikinOnePlusEntity, ClimateEntity):
         HVACMode.COOL,
         HVACMode.AUTO,
     ]
-    _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
+    if _NATIVE_CLIMATE_API:
+        _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
+    else:
+        # Home Assistant removes _attr_temperature_unit in 2027.11.
+        _attr_temperature_unit = UnitOfTemperature.CELSIUS
 
     def __init__(self, coordinator: DaikinOnePlusCoordinator) -> None:
         """Initialize the thermostat."""
@@ -76,23 +81,42 @@ class DaikinOnePlusClimate(DaikinOnePlusEntity, ClimateEntity):
         """Return the current operating mode."""
         return MODE_TO_HVAC_MODE.get(self._state["mode"], HVACMode.AUTO)
 
-    @property
-    @override
-    def native_current_temperature(self) -> float:
-        """Return the current indoor temperature."""
-        return self._state["tempIndoor"]
+    if _NATIVE_CLIMATE_API:
 
-    @property
-    @override
-    def native_target_temperature_low(self) -> float:
-        """Return the current heat setpoint."""
-        return self._state["heatSetpoint"]
+        @property
+        @override
+        def native_current_temperature(self) -> float:
+            """Return the current indoor temperature."""
+            return self._state["tempIndoor"]
 
-    @property
-    @override
-    def native_target_temperature_high(self) -> float:
-        """Return the current cool setpoint."""
-        return self._state["coolSetpoint"]
+        @property
+        @override
+        def native_target_temperature_low(self) -> float:
+            """Return the current heat setpoint."""
+            return self._state["heatSetpoint"]
+
+        @property
+        @override
+        def native_target_temperature_high(self) -> float:
+            """Return the current cool setpoint."""
+            return self._state["coolSetpoint"]
+
+    else:
+
+        @property
+        def current_temperature(self) -> float:
+            """Return the current indoor temperature."""
+            return self._state["tempIndoor"]
+
+        @property
+        def target_temperature_low(self) -> float:
+            """Return the current heat setpoint."""
+            return self._state["heatSetpoint"]
+
+        @property
+        def target_temperature_high(self) -> float:
+            """Return the current cool setpoint."""
+            return self._state["coolSetpoint"]
 
     @property
     @override
