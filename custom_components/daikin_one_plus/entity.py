@@ -1,0 +1,24 @@
+"""Base entity for Daikin One+."""
+
+from homeassistant.helpers.device_registry import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
+from .const import DOMAIN
+from .coordinator import DaikinOnePlusCoordinator
+
+
+class DaikinOnePlusEntity(CoordinatorEntity[DaikinOnePlusCoordinator]):
+    """Base class for Daikin One+ entities."""
+
+    _attr_has_entity_name = True
+
+    def __init__(self, coordinator: DaikinOnePlusCoordinator) -> None:
+        """Initialize the entity with its thermostat device information."""
+        super().__init__(coordinator)
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, coordinator.device_id)},
+            name=coordinator.device["name"],
+            manufacturer="Daikin",
+            model=coordinator.device["model"],
+            sw_version=coordinator.device["firmwareVersion"],
+        )

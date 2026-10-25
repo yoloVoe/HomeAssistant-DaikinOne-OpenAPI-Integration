@@ -1,0 +1,16 @@
+{
+  "domain": "daikin_one_plus",
+  "name": "daikin_one_plus_thermostat",
+  "categories": ["climate.thermostats_heating"],
+  "codeowners": ["@yoloVoe"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://www.home-assistant.io/integrations/daikin_one_plus",
+  "homekit": {},
+  "integration_type": "device",
+  "iot_class": "cloud_polling",
+  "quality_scale": "bronze",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": []
+}

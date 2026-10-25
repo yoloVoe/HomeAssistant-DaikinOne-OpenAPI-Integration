@@ -1,0 +1,79 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "cannot_connect": "Daikin {stage} failed ({reason}). Check Home Assistant's network access to integrator-api.daikinskyport.com and try again.",
+            "invalid_auth": "Invalid authentication",
+            "no_thermostat": "No thermostat is registered to this account",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "api_key": "API key",
+                    "api_token": "API token",
+                    "email": "Email"
+                },
+                "data_description": {
+                    "api_key": "Developer API key",
+                    "api_token": "Integrator token on account with Thermostat",
+                    "email": "Email on account with Thermostat"
+                }
+            }
+        }
+    },
+    "entity": {
+        "binary_sensor": {
+            "emergency_heat_active": {
+                "name": "Emergency heat active"
+            },
+            "emergency_heat_available": {
+                "name": "Emergency heat available"
+            },
+            "geofencing_enabled": {
+                "name": "Geofencing enabled"
+            }
+        },
+        "climate": {
+            "thermostat": {
+                "name": "Thermostat"
+            }
+        },
+        "sensor": {
+            "equipment_status": {
+                "name": "Equipment status"
+            },
+            "fan_circulate": {
+                "name": "Fan circulation"
+            },
+            "fan_circulate_speed": {
+                "name": "Fan circulation speed"
+            },
+            "fan_mode": {
+                "name": "Fan mode"
+            },
+            "indoor_humidity": {
+                "name": "Indoor humidity"
+            },
+            "mode_limit": {
+                "name": "Mode limit"
+            },
+            "outdoor_humidity": {
+                "name": "Outdoor humidity"
+            },
+            "outdoor_temperature": {
+                "name": "Outdoor temperature"
+            },
+            "setpoint_delta": {
+                "name": "Minimum setpoint difference"
+            }
+        },
+        "switch": {
+            "schedule": {
+                "name": "Schedule"
+            }
+        }
+    }
+}
